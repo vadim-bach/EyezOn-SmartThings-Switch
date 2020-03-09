@@ -74,7 +74,7 @@ preferences {
         input "did", "text", title: "Device ID", required: true
         input "part", "number", title: "Partition #", required: true
         input "pin", "number", title: "Disarm PIN", required: true
-        input "mode", "enum", title: "Arm Mode", options: [ARM_MODE_STAY, ARM_MODE_AWAY]
+        input "mode", "enum", title: "Arm Mode", options: [ARM_MODE_STAY(), ARM_MODE_AWAY()]
     }
 }
 
