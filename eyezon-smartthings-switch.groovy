@@ -4,8 +4,8 @@
  * Version: 1.0
  *
  * Description:
- * Integrates SmartThings with home security alarm system through the use
- * of the Eyez-On server to enable automation for arming/disarming system.
+ * Integrates SmartThings with EnvisaLink-enabled home security alarm system through
+ * the use of the Eyez-On server to enable automation for arming/disarming system.
  *
  * TODO: Update switch state based on system status (feedback loop).
  */
