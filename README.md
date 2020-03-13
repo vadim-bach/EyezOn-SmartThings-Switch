@@ -15,7 +15,7 @@ This program will enable you to create a virtual switch in your SmartThings that
 
 1. Login to your [SmartThings account](https://account.smartthings.com/login)
 1. Create a new Device Handler **From Code**
-1. Copy the code from **eyezon-smartthings-switch.groovy** file into the text field and hit **Create**
+1. Copy the code from the correcct **eyezon-smartthings-switch-xxxxxxx.groovy** file (based on your version of EnvisaLink) into the text field and hit **Create**
 1. Hit **Publish** button to push the handler to your hub
 1. Go to **My Devices** tab
 1. Create the "Away" switch by hitting **New Device** button and filling out the fields as shown below:
