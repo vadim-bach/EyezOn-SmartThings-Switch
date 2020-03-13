@@ -1,6 +1,6 @@
 # EyezOn SmartThings Switch
 This assumes you have:
-* [SmartThings Hub](https://www.smartthings.com/products/smartthings-hub)
+* [SmartThings Hub](https://www.smartthings.com/products/smartthings-hub) (tested only with EnvisaLink v4)
 * Home security system coupled to an [EyezOn EnvisaLink](http://www.eyezon.com/index.php) module
 
 This program will enable you to create a virtual switch in your SmartThings that will integrate with your EnvisaLink module. This will allow you to arm/disarm your home security system in the desired mode (stay/away) through SmartThings, just like with any other switch. Then you can do cool stuff like:
