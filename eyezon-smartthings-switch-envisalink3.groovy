@@ -9,8 +9,6 @@
  * Integrates SmartThings with EnvisaLink-enabled home security alarm system through
  * the use of the Eyez-On server to enable automation for arming/disarming system.
  *
- * TODO: Update switch state based on system status (feedback loop).
- *
  * Copyright 2020 Vadim Bachmutsky
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
