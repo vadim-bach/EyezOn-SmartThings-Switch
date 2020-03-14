@@ -1,7 +1,7 @@
 # EyezOn SmartThings Switch
 This assumes you have:
 * [SmartThings Hub](https://www.smartthings.com/products/smartthings-hub)
-* Home security system coupled to an [EyezOn EnvisaLink](http://www.eyezon.com/index.php) module  (tested only with EnvisaLink v4)
+* Home security system coupled to an [EyezOn EnvisaLink](http://www.eyezon.com/index.php) module  (tested with EnvisaLink 3 and 4)
 
 This program will enable you to create a virtual switch in your SmartThings that will integrate with your EnvisaLink module. This will allow you to arm/disarm your home security system in the desired mode (stay/away) through SmartThings, just like with any other switch. Then you can do cool stuff like:
 * [Away] Arm system when everyone leaves the house
@@ -47,4 +47,6 @@ This program will enable you to create a virtual switch in your SmartThings that
 1. Add the switches to your SmartThings Routines as desired. For example, you can update your **Goodbye!** routine to turn **on** the **Eyez-On Away** switch (make sure to configure the routine to run automatically when **Everyone Leaves**). Similarly, you can amend your **I'm Back!** routine to turn **off** the **Eyez-On Away** switch (and automate it to run when **Someone Arrives**).
 1. You can go one step further and add automation in Alexa (assuming it's already integrated with your SmartThings App) to trigger arming/disarming the switches on command (probably only makes sense with the **Eyez-On Stay** switch)
 
-**Note: The manual toggling of the switches in SmartThings app does not work well due to the lack of status updating/polling functionality. Please refrain from toggling the switches manually in the App. (I'm hopeful I'll get some free time to get it fixed at some point, if someone else doesn't)**
+# Contributors:
+* [John Constantelo](https://github.com/jsconstantelos)
+
