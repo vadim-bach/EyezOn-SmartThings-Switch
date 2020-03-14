@@ -1,7 +1,7 @@
 /*
  * Author: Vadim Bachmutsky
  * Contributors:
- *     John Constantelo (https://github.com/jsconstantelos)
+ *     John Constantelos (https://github.com/jsconstantelos)
  * Program: Eyez-On SmartThings Switch
  * Version: 1.0
  *
