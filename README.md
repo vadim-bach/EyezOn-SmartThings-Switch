@@ -48,5 +48,5 @@ This program will enable you to create a virtual switch in your SmartThings that
 1. You can go one step further and add automation in Alexa (assuming it's already integrated with your SmartThings App) to trigger arming/disarming the switches on command (probably only makes sense with the **Eyez-On Stay** switch)
 
 # Contributors:
-* [John Constantelo](https://github.com/jsconstantelos)
+* [John Constantelos](https://github.com/jsconstantelos)
 
