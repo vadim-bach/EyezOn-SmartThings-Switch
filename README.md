@@ -48,8 +48,8 @@ This program will enable you to create a virtual switch in your SmartThings that
 1. Add the switches to your SmartThings Routines as desired. For example, you can update your **Goodbye!** routine to turn **on** the **Eyez-On Away** switch (make sure to configure the routine to run automatically when **Everyone Leaves**). Similarly, you can amend your **I'm Back!** routine to turn **off** the **Eyez-On Away** switch (and automate it to run when **Someone Arrives**).
 1. You can go one step further and add automation in Alexa (assuming it's already integrated with your SmartThings App) to trigger arming/disarming the switches on command (probably only makes sense with the **Eyez-On Stay** switch)
 
-Notes:  
-(1) There are two variants of the code; it seems that, based on some odd combination of hardware and/or software variant-01 works for some people, and variant-02 for others. You can determine which variant to use based on the format of the request that EyezOn website makes to the server (if you know how to use browser dev tools to look that up):
+# Notes:  
+**(1)** There are two variants of the code; it seems that, based on some odd combination of hardware and/or software variant-01 works for some people, and variant-02 for others. You can determine which variant to use based on the format of the request that EyezOn website makes to the server (if you know how to use browser dev tools to look that up):
   * Variant 01: if on system arm request body contains param 'hextaction'
   * Variant 02: if on system arm request body does NOT contain param 'hextaction'
   
