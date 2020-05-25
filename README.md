@@ -42,16 +42,17 @@ This program will enable you to create a virtual switch in your SmartThings that
     * Account ID: The Account ID you've written down above (case sensitive!)
     * Device ID: The Device ID you've written down above (case sensitive!)
     * Partition #: Partition that you'd like to control with this switch (generally "1" unless you have more than one partition)
-    * Disarm PIN: PIN/password you use to disarm the system. This will effectively be stored inside your hub and SmartThings cloud account. (known issue around codes that begin with '0')
+    * Disarm PIN: PIN/password you use to disarm the system. This will effectively be stored inside your hub and SmartThings cloud account. (known issue around PINs that begin with '0')
     * Arm Mode: Select the correct arm mode for your switch ("Away" for the "Eyez-On Away" switch, and "Stay" for the "Eyez-On Stay" switch)
     * Exit Delay: Set the exit delay to match the one configured with your alarm. Enter number as integer e.g. "60" as opposed to "60.0". (Note: this is only being used to tell the handler when to check/refresh system status after arm/disarm).
 1. Add the switches to your SmartThings Routines as desired. For example, you can update your **Goodbye!** routine to turn **on** the **Eyez-On Away** switch (make sure to configure the routine to run automatically when **Everyone Leaves**). Similarly, you can amend your **I'm Back!** routine to turn **off** the **Eyez-On Away** switch (and automate it to run when **Someone Arrives**).
 1. You can go one step further and add automation in Alexa (assuming it's already integrated with your SmartThings App) to trigger arming/disarming the switches on command (probably only makes sense with the **Eyez-On Stay** switch)
 
-Notes:
+Notes:  
 (1) There are two variants of the code; it seems that, based on some odd combination of hardware and/or software variant-01 works for some people, and variant-02 for others. You can determine which variant to use based on the format of the request that EyezOn website makes to the server (if you know how to use browser dev tools to look that up):
   * Variant 01: if on system arm request body contains param 'hextaction'
   * Variant 02: if on system arm request body does NOT contain param 'hextaction'
+  
 Otherwise, just try one - if it doesn't work, try the other one.
 
 # Contributors:
