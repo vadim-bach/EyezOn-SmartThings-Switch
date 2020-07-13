@@ -144,23 +144,29 @@ def getSystemStatus() {
     	log.error 'Unable to get current system status', e
     	throw e
     }
+	
+    // SmartThings doesn't support regex: https://community.smartthings.com/t/unable-to-use-matcher-methods/1280
+    // So we have to do this the dumb/brittle way
     def systemStatus = STATUS_UNKNOWN()
-    if (textData.contains(STATUS_READY())) {
+    if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:green;\"> Ready")) {
     	systemStatus = STATUS_READY()
         sendEvent(name: "switch", value: "off")
-    } else if (textData.contains(STATUS_BUSY())) {
+    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:black; \"> Busy")) {
     	systemStatus = STATUS_BUSY()
         sendEvent(name: "switch", value: "busy")
-    } else if (textData.contains(STATUS_EXIT_DELAY())) {
+    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:orange;\"> Exit Delay")) {
     	systemStatus = STATUS_EXIT_DELAY()
         sendEvent(name: "switch", value: "exiting")
-    } else if (textData.contains(STATUS_AWAY_ARMED())) {
+    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:red;\"> Away Armed")) {
     	systemStatus = STATUS_AWAY_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains(STATUS_STAY_ARMED())) {
+    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:red;\"> Stay Armed")) {
     	systemStatus = STATUS_STAY_ARMED()
         sendEvent(name: "switch", value: "on")
+    } else {
+    	log.error "Unable to determine system status from response: ${textData}. Setting to Unknown."
     }
+	
     log.info "Determined system status to be ${systemStatus} at ${timeString}"
     sendEvent(name: "alarmActivity", value: timeString, descriptionText: text, displayed: true)
     return systemStatus
