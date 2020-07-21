@@ -69,7 +69,8 @@ preferences {
     section("Settings"){
         input "mid", "text", title: "Account ID", required: true
         input "did", "text", title: "Device ID", required: true
-        input "part", "number", title: "Partition #", required: true
+        input "part", "number", title: "Partition #", defaultValue: 1, required: true
+        input "partName", "text", title: "Partition Label (as it appears in EyezOn)", defaultValue: "Partition 1", required: true
         input "pin", "number", title: "Disarm PIN", required: true
         input "mode", "enum", title: "Arm Mode", options: [ARM_MODE_STAY(), ARM_MODE_AWAY()]
         input "exitDelay", "number", title: "System exit delay (in seconds, default is 60)", defaultValue: 60, range: "1..180", required: true
@@ -148,19 +149,19 @@ def getSystemStatus() {
     // SmartThings doesn't support regex: https://community.smartthings.com/t/unable-to-use-matcher-methods/1280
     // So we have to do this the dumb/brittle way
     def systemStatus = STATUS_UNKNOWN()
-    if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:green;\"> Ready")) {
+    if (textData.contains("${settings.partName} : <span style=\"color:green;\"> Ready")) {
     	systemStatus = STATUS_READY()
         sendEvent(name: "switch", value: "off")
-    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:black; \"> Busy")) {
+    } else if (textData.contains("${settings.partName} : <span style=\"color:black; \"> Busy")) {
     	systemStatus = STATUS_BUSY()
         sendEvent(name: "switch", value: "busy")
-    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:orange;\"> Exit Delay")) {
+    } else if (textData.contains("${settings.partName} : <span style=\"color:orange;\"> Exit Delay")) {
     	systemStatus = STATUS_EXIT_DELAY()
         sendEvent(name: "switch", value: "exiting")
-    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:red;\"> Away Armed")) {
+    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Away Armed")) {
     	systemStatus = STATUS_AWAY_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("<p> Partition ${settings.part} : <span style=\"color:red;\"> Stay Armed")) {
+    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Stay Armed")) {
     	systemStatus = STATUS_STAY_ARMED()
         sendEvent(name: "switch", value: "on")
     } else {
