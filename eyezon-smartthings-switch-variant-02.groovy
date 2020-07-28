@@ -71,7 +71,7 @@ preferences {
         input "did", "text", title: "Device ID", required: true
         input "part", "number", title: "Partition #", defaultValue: 1, required: true
         input "partName", "text", title: "Partition Label (as it appears in EyezOn)", defaultValue: "Partition 1", required: true
-        input "pin", "number", title: "Disarm PIN", required: true
+        input "pin", "password", title: "Disarm PIN", required: true
         input "mode", "enum", title: "Arm Mode", options: [ARM_MODE_STAY(), ARM_MODE_AWAY()]
         input "exitDelay", "number", title: "System exit delay (in seconds, default is 60)", defaultValue: 60, range: "1..180", required: true
     }
