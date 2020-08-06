@@ -78,7 +78,7 @@ preferences {
 }
 
 metadata {
-    definition (name: "My Eyez-On SmartThings Switch", namespace: "jsconstantelos", author: "Vadim Bachmutsky", ocfDeviceType: "x.com.st.d.remotecontroller") {
+    definition (name: "My Eyez-On SmartThings Switch", namespace: "vadimbach", author: "Vadim Bachmutsky", ocfDeviceType: "x.com.st.d.remotecontroller") {
         capability "Actuator"
         capability "Switch"
         capability "Sensor"
