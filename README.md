@@ -43,7 +43,7 @@ This program will enable you to create a virtual switch in your SmartThings that
     * Device ID: The Device ID you've written down above (case sensitive!)
     * Partition #: Partition that you'd like to control with this switch (generally "1" unless you have more than one partition)
     * Partition Label: Label of the partition as it appears in your EyezOn app (generally "Partition 1" unless you customized it)
-    * Disarm PIN: PIN/password you use to disarm the system. This will effectively be stored inside your hub and SmartThings cloud account. (known issue around PINs that begin with '0')
+    * Disarm PIN: PIN/password you use to disarm the system. This will effectively be stored inside your hub and SmartThings cloud account.
     * Arm Mode: Select the correct arm mode for your switch ("Away" for the "Eyez-On Away" switch, and "Stay" for the "Eyez-On Stay" switch)
     * Exit Delay: Set the exit delay to match the one configured with your alarm. Enter number as integer e.g. "60" as opposed to "60.0". (Note: this is only being used to tell the handler when to check/refresh system status after arm/disarm).
 1. Add the switches to your SmartThings Routines as desired. For example, you can update your **Goodbye!** routine to turn **on** the **Eyez-On Away** switch (make sure to configure the routine to run automatically when **Everyone Leaves**). Similarly, you can amend your **I'm Back!** routine to turn **off** the **Eyez-On Away** switch (and automate it to run when **Someone Arrives**).
