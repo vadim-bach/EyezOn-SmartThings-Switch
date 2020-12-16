@@ -3,7 +3,7 @@
  * Contributors:
  * 	John Constantelos (https://github.com/jsconstantelos)
  * Program: Eyez-On SmartThings Switch
- * Version: 1.0
+ * Version: 1.0 (variant 02)
  *
  * Description:
  * Integrates SmartThings with EnvisaLink4-enabled home security alarm system through
