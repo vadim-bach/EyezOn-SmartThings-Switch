@@ -15,7 +15,7 @@ This program will enable you to create a virtual switch in your SmartThings that
 
 1. Login to your [SmartThings account](https://account.smartthings.com/login)
 1. Create a new Device Handler **From Code**
-1. Copy the code from **eyezon-smartthings-switch-variant-xx.groovy** file into the text field and hit **Create**. See important note<sup>1</sup> about which variant to choose below.
+1. Copy the code from **eyezon-smartthings-switch.groovy** file into the text field and hit **Create**.
 1. Hit **Publish** button to push the handler to your hub
 1. Go to **My Devices** tab
 1. Create the "Away" switch by hitting **New Device** button and filling out the fields as shown below:
@@ -46,15 +46,9 @@ This program will enable you to create a virtual switch in your SmartThings that
     * Disarm PIN: PIN/password you use to disarm the system. This will effectively be stored inside your hub and SmartThings cloud account.
     * Arm Mode: Select the correct arm mode for your switch ("Away" for the "Eyez-On Away" switch, and "Stay" for the "Eyez-On Stay" switch)
     * Exit Delay: Set the exit delay to match the one configured with your alarm. Enter number as integer e.g. "60" as opposed to "60.0". (Note: this is only being used to tell the handler when to check/refresh system status after arm/disarm).
+    * Code Variant: It seems that, based on some odd combination of hardware and/or software, the exact command that gets sent to the server varies system to system. This handler is written to support both but you'd need to go through a process of trial and error to figure out which will work for you. Try selecting "1" here; if it doesn't work (i.e. nothing happens when arming/disarming), switch to "2".
 1. Add the switches to your SmartThings Routines as desired. For example, you can update your **Goodbye!** routine to turn **on** the **Eyez-On Away** switch (make sure to configure the routine to run automatically when **Everyone Leaves**). Similarly, you can amend your **I'm Back!** routine to turn **off** the **Eyez-On Away** switch (and automate it to run when **Someone Arrives**).
 1. You can go one step further and add automation in Alexa (assuming it's already integrated with your SmartThings App) to trigger arming/disarming the switches on command (probably only makes sense with the **Eyez-On Stay** switch)
-
-# Notes:  
-**(1)** There are two variants of the code; it seems that, based on some odd combination of hardware and/or software variant-01 works for some people, and variant-02 for others. You can determine which variant to use based on the format of the request that EyezOn website makes to the server (if you know how to use browser dev tools to look that up):
-  * Variant 01: if on system arm request body contains param 'hextaction'
-  * Variant 02: if on system arm request body does NOT contain param 'hextaction'
-  
-Otherwise, just try one - if it doesn't work, try the other one.
 
 # Contributors:
 * [John Constantelos](https://github.com/jsconstantelos)
