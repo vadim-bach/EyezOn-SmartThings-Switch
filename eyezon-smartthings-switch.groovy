@@ -194,7 +194,7 @@ def getSystemStatus() {
     } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Night Armed")) {
         systemStatus = STATUS_NIGHT_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Instant Armed")) {
+    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Armed Zero Entry Delay")) {
         systemStatus = STATUS_INSTANT_ARMED()
         sendEvent(name: "switch", value: "on")
     } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Max Armed")) {
