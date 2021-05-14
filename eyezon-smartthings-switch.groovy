@@ -48,11 +48,8 @@ def STATUS_STAY_ARMED() {
 def STATUS_NIGHT_ARMED() {
     return "Night Armed"
 }
-def STATUS_INSTANT_ARMED() {
-    return "Instant Armed"
-}
-def STATUS_MAX_ARMED() {
-    return "Max Armed"
+def STATUS_ZERO_DELAY_ARMED() {
+    return "Zero Delay Armed"
 }
 def STATUS_UNKNOWN() {
     return "Unknown"
@@ -195,10 +192,7 @@ def getSystemStatus() {
         systemStatus = STATUS_NIGHT_ARMED()
         sendEvent(name: "switch", value: "on")
     } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Armed Zero Entry Delay")) {
-        systemStatus = STATUS_INSTANT_ARMED()
-        sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Max Armed")) {
-        systemStatus = STATUS_MAX_ARMED()
+        systemStatus = STATUS_ZERO_DELAY_ARMED()
         sendEvent(name: "switch", value: "on")
     } else {
         log.error "Unable to determine system status from response: ${textData}. Setting to Unknown."
@@ -290,7 +284,7 @@ def on() {
 def off() {
     log.info "Received request to disarm system. Mode: ${settings.mode}"
     def systemStatus = getSystemStatus()
-    if (![STATUS_AWAY_ARMED(), STATUS_STAY_ARMED(), STATUS_NIGHT_ARMED(), STATUS_INSTANT_ARMED(), STATUS_MAX_ARMED(), STATUS_EXIT_DELAY()].contains(systemStatus)) {
+    if (![STATUS_AWAY_ARMED(), STATUS_STAY_ARMED(), STATUS_NIGHT_ARMED(), STATUS_ZERO_DELAY_ARMED(), STATUS_EXIT_DELAY()].contains(systemStatus)) {
         log.error "Cannot disarm system: system is in invalid state ${systemStatus}"
         return
     }
@@ -303,10 +297,7 @@ def off() {
     } else if (systemStatus == STATUS_NIGHT_ARMED() && settings.mode != ARM_MODE_NIGHT()) {
         log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
         return
-    } else if (systemStatus == STATUS_INSTANT_ARMED() && settings.mode != ARM_MODE_INSTANT()) {
-        log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
-        return
-    } else if (systemStatus == STATUS_MAX_ARMED() && settings.mode != ARM_MODE_MAX()) {
+    } else if (systemStatus == STATUS_ZERO_DELAY_ARMED() && settings.mode != ARM_MODE_INSTANT() && settings.mode != ARM_MODE_MAX()) {
         log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
         return
     }
