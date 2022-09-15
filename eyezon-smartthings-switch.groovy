@@ -48,8 +48,11 @@ def STATUS_STAY_ARMED() {
 def STATUS_NIGHT_ARMED() {
     return "Night Armed"
 }
-def STATUS_ZERO_DELAY_ARMED() {
-    return "Zero Delay Armed"
+def STATUS_INSTANT_ARMED() {
+    return "Instant Armed"
+}
+def STATUS_MAX_ARMED() {
+    return "Max Armed"
 }
 def STATUS_UNKNOWN() {
     return "Unknown"
@@ -173,26 +176,29 @@ def getSystemStatus() {
     // SmartThings doesn't support regex: https://community.smartthings.com/t/unable-to-use-matcher-methods/1280
     // So we have to do this the dumb/brittle way
     def systemStatus = STATUS_UNKNOWN()
-    if (textData.contains("${settings.partName} : <span style=\"color:green;\"> Ready")) {
+    if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-success\">Ready</div>")) {
         systemStatus = STATUS_READY()
         sendEvent(name: "switch", value: "off")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:black; \"> Busy")) {
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class>Busy</div>")) {
         systemStatus = STATUS_BUSY()
         sendEvent(name: "switch", value: "busy")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:orange;\"> Exit Delay")) {
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Exit Delay</div>")) {
         systemStatus = STATUS_EXIT_DELAY()
         sendEvent(name: "switch", value: "exiting")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Away Armed")) {
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Away Armed</div>")) {
         systemStatus = STATUS_AWAY_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Stay Armed")) {
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Stay Armed</div>")) {
         systemStatus = STATUS_STAY_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Night Armed")) {
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Night Armed</div>")) {
         systemStatus = STATUS_NIGHT_ARMED()
         sendEvent(name: "switch", value: "on")
-    } else if (textData.contains("${settings.partName} : <span style=\"color:red;\"> Armed Zero Entry Delay")) {
-        systemStatus = STATUS_ZERO_DELAY_ARMED()
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Instant Armed</div>")) {
+        systemStatus = STATUS_INSTANT_ARMED()
+        sendEvent(name: "switch", value: "on")
+    } else if (textData.contains("<div id=\"s1p${settings.part}stat\" class=\"text-danger\">Max Armed</div>")) {
+        systemStatus = STATUS_MAX_ARMED()
         sendEvent(name: "switch", value: "on")
     } else {
         log.error "Unable to determine system status from response: ${textData}. Setting to Unknown."
@@ -284,7 +290,7 @@ def on() {
 def off() {
     log.info "Received request to disarm system. Mode: ${settings.mode}"
     def systemStatus = getSystemStatus()
-    if (![STATUS_AWAY_ARMED(), STATUS_STAY_ARMED(), STATUS_NIGHT_ARMED(), STATUS_ZERO_DELAY_ARMED(), STATUS_EXIT_DELAY()].contains(systemStatus)) {
+    if (![STATUS_AWAY_ARMED(), STATUS_STAY_ARMED(), STATUS_NIGHT_ARMED(), STATUS_INSTANT_ARMED(), STATUS_MAX_ARMED(), STATUS_EXIT_DELAY()].contains(systemStatus)) {
         log.error "Cannot disarm system: system is in invalid state ${systemStatus}"
         return
     }
@@ -297,7 +303,10 @@ def off() {
     } else if (systemStatus == STATUS_NIGHT_ARMED() && settings.mode != ARM_MODE_NIGHT()) {
         log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
         return
-    } else if (systemStatus == STATUS_ZERO_DELAY_ARMED() && settings.mode != ARM_MODE_INSTANT() && settings.mode != ARM_MODE_MAX()) {
+    } else if (systemStatus == STATUS_INSTANT_ARMED() && settings.mode != ARM_MODE_INSTANT()) {
+        log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
+        return
+    } else if (systemStatus == STATUS_MAX_ARMED() && settings.mode != ARM_MODE_MAX()) {
         log.error "Cannot disarm system in mode ${systemStatus} via switch in mode ${settings.mode}."
         return
     }
