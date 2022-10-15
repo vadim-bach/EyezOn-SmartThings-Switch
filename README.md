@@ -1,3 +1,6 @@
+# !!! DEPRECATED !!! #
+SmartThings has now deprecated Groovy-based device handlers and replaced them with the new Edge Drivers. You should look into using [this driver](https://github.com/toddaustin07/edge_envisalink) instead.
+
 # EyezOn SmartThings Switch
 This assumes you have:
 * [SmartThings Hub](https://www.smartthings.com/products/smartthings-hub)
